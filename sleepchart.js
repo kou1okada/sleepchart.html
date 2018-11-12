@@ -1,0 +1,110 @@
+const DAY=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function rendering(sleeplog)
+{
+  let scale = 1/4;
+  console.log(sleeplog);
+  let sleepchart = document.createElement("div");
+  sleepchart.classList.add("sleepchart");
+  document.body.appendChild(sleepchart);
+  sleeplog.forEach((log, date)=>{
+    console.log(strftime("%F", new Date(date * 60000)));
+    let datetime1, datetime2;
+    let state1, state2;
+    let day = sleepchart.appendChild(document.createElement("div"));
+    let label = day.appendChild(document.createElement("div"));
+    let stateblock = day.appendChild(document.createElement("div"));
+    label.appendChild(document.createTextNode(strftime("%F", new Date(date * 60000))));
+    day.classList.add("day");
+    day.classList.add(DAY[(new Date(date * 60000)).getDay()]);
+    label.classList.add("label")
+    stateblock.classList.add("state")
+    stateblock.style.width = `${1440 * scale}px`;
+    log.forEach((state, time)=>{
+      datetime2 = datetime1;
+      datetime1 = date + time;
+      console.log(strftime("%H:%M", new Date(datetime1 * 60000)) + ` ${state}`);
+      state2 = state1;
+      state1 = state;
+      if (datetime2 != undefined) {
+        let st = document.createElement("div");
+        st.classList.add(state2);
+        st.style.width = `${(datetime1 - datetime2) * scale}px`;
+        st.title = `${strftime("%H:%M", new Date(datetime2 * 60000))}-${strftime("%H:%M", new Date(datetime1 * 60000))}`;
+        stateblock.appendChild(st);
+      }
+    });
+    if (day.previousSibling) {
+      day.previousSibling.appendChild(stateblock.cloneNode(true));
+    }
+    laststate = state2;
+  });
+}
+
+/**
+ * Call back at file loaded.
+ * @param {*} e    - Event object 
+ * @param {*} file - File object
+ */
+function onLoadFile(e, file) {
+  //console.log(e.target.result);
+  let lines = e.target.result.split("\n");
+  let yyyymmdd1, yyyymmdd2, hhmm1, hhmm2;
+  let date1, date2, time1, time2, datetime1, datetime2;
+  let state1, state2;
+  let state1time = 0, state2time;
+  let log, logex;
+  let sleeplog = [];
+  lines.some((s, i)=>{
+    if (s.match(/^END$/)) {
+      return true;
+    } else if (s.match(/^(([0-9]{4})([0-9]{2})([0-9]{2}))[ \t]*$/)) {
+      yyyymmdd2 = yyyymmdd1;
+      yyyymmdd1 = RegExp.$1;
+      date2 = date1;
+      date1 = Date.parse(`${RegExp.$2}/${RegExp.$3}/${RegExp.$4}`);
+      if (date2 != undefined && date1 - date2 != 86400000) {
+        console.error(`Incontinuous date sequence: ${yyyymmdd2}(@${date2} to ${yyyymmdd1}(@${date1}) at line ${i + 1}.`);
+      }
+      if (yyyymmdd2 != undefined) {
+        sleeplog[date2 / 60000][1440] = state1;
+      }
+      sleeplog[date1 / 60000] = [];
+      state1time = time1 = 0;
+//      state1 = state2 = undefined;
+    } else if (s.match(/^(([0-9]{2})([0-9]{2}))(\t(([swoLh])([?,、](.*))?))?[ ]*$/)) {
+      hhmm2 = hhmm1;
+      hhmm1 = RegExp.$1;
+      h = parseInt(RegExp.$2, 10);
+      m = parseInt(RegExp.$3, 10);
+      time2 = time1;
+      time1 = (h * 60 + m) * 60 * 1000;
+      log   = RegExp.$6;
+      logex = RegExp.$7;
+      if (time2 != undefined) {
+        datetime2 = date1 + time2;
+        datetime1 = date1 + time1;
+        if (datetime1 < datetime2) {
+          console.error(`Incorrect time sequence: MJD: ${hhmm2} to ${hhmm1} at line ${i + 1}.`);
+        }
+      }
+      if (log == "s" || log == "w") {
+        state2time = state1time;
+        state1time = time1;
+        state2 = state2 == undefined ? (log == "s" ? "w" : "s") : state1;
+        state1 = log;
+        sleeplog[date1 / 60000][state2time / 60000] = state2;
+        sleeplog[date1 / 60000][state1time / 60000] = state1;
+      }
+    }
+    return false;
+  });
+  rendering(sleeplog);
+  console.log(sleeplog);
+  return 0;
+}
+
+window.addEventListener("load", ()=>{
+  let e = document.querySelectorAll(".file_droppable");
+  [].forEach.call(e, e=>FileDroppable.attach(e, {filereaderload: onLoadFile}));
+});

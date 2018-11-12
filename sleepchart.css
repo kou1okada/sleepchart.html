@@ -1,0 +1,36 @@
+.sleepchart .day {
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+}
+.sleepchart .day div {
+  display: inline-block;
+}
+  
+.sleepchart .day .label {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 8em;
+  vertical-align: top;
+}
+    
+.sleepchart .day .state {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+.s, .w {
+  height: 1.4em;
+}
+.sleepchart .day .s {
+  background: blue;
+}
+
+.sleepchart .day .w {
+  background: yellow;
+}
+
+.Sun {background: pink;}
+.Sat {background: skyblue;}

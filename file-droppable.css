@@ -1,0 +1,11 @@
+label.file_droppable {
+  display: inline-block;
+  border: 2px dashed red;
+  padding: 2em 2ex;
+}
+.file_droppable input {
+  display: none;
+}
+.dragover {
+  background: #FCC;
+}
