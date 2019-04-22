@@ -48,7 +48,7 @@ function rendering(sleeplog)
  */
 function onLoadFile(e, file) {
   //console.log(e.target.result);
-  let lines = e.target.result.split("\n");
+  let lines = e.target.result.split(/\r\n|\n|\r/);
   let yyyymmdd1, yyyymmdd2, hhmm1, hhmm2;
   let date1, date2, time1, time2, datetime1, datetime2;
   let state1, state2;
