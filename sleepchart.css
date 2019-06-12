@@ -35,3 +35,61 @@
 
 .Sun {background: pink;}
 .Sat {background: skyblue;}
+
+.sleepchart .w, .sleepchart .s {opacity: 0.4;}
+
+.sleepchart .header {background: white; position: stikey; top:    0; z-index: 1;}
+.sleepchart .footer {background: white; position: stikey; bottom: 0; z-index: 1;}
+.sleepchart .grid  {border-style: dotted; border-width: 0 0 0 1px;}
+.sleepchart .ruler {border-style: dotted; border-width: 0 0 0 1px;}
+.sleepchart ._0000 {border-color: black; border-style: solid;}
+.sleepchart ._0100 {border-color: black; border-style: dotted;}
+.sleepchart ._0200 {border-color: black; border-style: dotted;}
+.sleepchart ._0300 {border-color: black; border-style: dotted;}
+.sleepchart ._0400 {border-color: black; border-style: dotted;}
+.sleepchart ._0500 {border-color: black; border-style: dotted;}
+.sleepchart ._0600 {border-color: black; border-style: solid;}
+.sleepchart ._0700 {border-color: black; border-style: dotted;}
+.sleepchart ._0800 {border-color: black; border-style: dotted;}
+.sleepchart ._0900 {border-color: black; border-style: dotted;}
+.sleepchart ._1000 {border-color: black; border-style: dotted;}
+.sleepchart ._1100 {border-color: black; border-style: dotted;}
+.sleepchart ._1200 {border-color: black; border-style: solid;}
+.sleepchart ._1300 {border-color: black; border-style: dotted;}
+.sleepchart ._1400 {border-color: black; border-style: dotted;}
+.sleepchart ._1500 {border-color: black; border-style: dotted;}
+.sleepchart ._1600 {border-color: black; border-style: dotted;}
+.sleepchart ._1700 {border-color: black; border-style: dotted;}
+.sleepchart ._1800 {border-color: black; border-style: solid;}
+.sleepchart ._1900 {border-color: black; border-style: dotted;}
+.sleepchart ._2000 {border-color: black; border-style: dotted;}
+.sleepchart ._2100 {border-color: black; border-style: dotted;}
+.sleepchart ._2200 {border-color: black; border-style: dotted;}
+.sleepchart ._2300 {border-color: black; border-style: dotted;}
+
+.sleepchart .ruler._0000 {background: gray;}
+.sleepchart .ruler._0100 {background: gray;}
+.sleepchart .ruler._0200 {background: gray;}
+.sleepchart .ruler._0300 {background: gray;}
+.sleepchart .ruler._0400 {background: gray;}
+.sleepchart .ruler._0500 {background: gray;}
+.sleepchart .ruler._0600 {background: white;}
+.sleepchart .ruler._0700 {background: white;}
+.sleepchart .ruler._0800 {background: white;}
+.sleepchart .ruler._0900 {background: white;}
+.sleepchart .ruler._1000 {background: white;}
+.sleepchart .ruler._1100 {background: white;}
+.sleepchart .ruler._1200 {background: white;}
+.sleepchart .ruler._1300 {background: white;}
+.sleepchart .ruler._1400 {background: white;}
+.sleepchart .ruler._1500 {background: white;}
+.sleepchart .ruler._1600 {background: white;}
+.sleepchart .ruler._1700 {background: white;}
+.sleepchart .ruler._1800 {background: gray;}
+.sleepchart .ruler._1900 {background: gray;}
+.sleepchart .ruler._2000 {background: gray;}
+.sleepchart .ruler._2100 {background: gray;}
+.sleepchart .ruler._2200 {background: gray;}
+.sleepchart .ruler._2300 {background: gray;}
+
+.sleepchart .gridbase {position: absolute; z-index: 0;}

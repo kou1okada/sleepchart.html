@@ -7,6 +7,29 @@ function rendering(sleeplog)
   let sleepchart = document.createElement("div");
   sleepchart.classList.add("sleepchart");
   document.body.appendChild(sleepchart);
+  let t0 = Date.parse("1970/01/01 00:00:00") / 60000;
+  let header;
+  {
+    let day =	header = sleepchart.appendChild(document.createElement("div"));
+    let label = day.appendChild(document.createElement("div"));
+    let rulerbase = day.appendChild(document.createElement("div"));
+    label.appendChild(document.createTextNode("Date"));
+    day.classList.add("day", "header");
+    day.style.position = "sticky";
+    day.style.top = 0;
+    label.classList.add("label")
+    rulerbase.classList.add("rulerbase")
+    rulerbase.style.width = `${1440 * scale}px`;
+    for (let i = 0; i < 24; i++) {
+      let ruler = document.createElement("div");
+      ruler.classList.add("ruler", `_${strftime("%H%M", new Date((t0 + i * 60) * 60000))}`);
+      ruler.style.width = `${60 * scale - 1}px`;
+      ruler.title = `${strftime("%H:%M", new Date((t0 + i * 60) * 60000))}`;
+      rulerbase.appendChild(ruler);
+    }
+    day.appendChild(rulerbase.cloneNode(true));
+  }
+  
   sleeplog.forEach((log, date)=>{
     console.log(strftime("%F", new Date(date * 60000)));
     let datetime1, datetime2;
@@ -14,12 +37,21 @@ function rendering(sleeplog)
     let day = sleepchart.appendChild(document.createElement("div"));
     let label = day.appendChild(document.createElement("div"));
     let stateblock = day.appendChild(document.createElement("div"));
+    let gridbase = stateblock.appendChild(document.createElement("div"));
     label.appendChild(document.createTextNode(strftime("%F", new Date(date * 60000))));
     day.classList.add("day");
     day.classList.add(DAY[(new Date(date * 60000)).getDay()]);
     label.classList.add("label")
     stateblock.classList.add("state")
     stateblock.style.width = `${1440 * scale}px`;
+    gridbase.classList.add("gridbase");
+    gridbase.style.width = `${1440 * scale}px`;
+    for (let i = 0; i < 24; i++) {
+      let grid = document.createElement("div");
+      grid.classList.add("grid", `_${strftime("%H%M", new Date((t0 + i * 60) * 60000))}`);
+      grid.style.width = `${60 * scale - 1}px`;
+      gridbase.appendChild(grid);
+    }
     log.forEach((state, time)=>{
       datetime2 = datetime1;
       datetime1 = date + time;
@@ -34,11 +66,15 @@ function rendering(sleeplog)
         stateblock.appendChild(st);
       }
     });
-    if (day.previousSibling) {
+    if (day.previousSibling && day.previousSibling.previousSibling) {
       day.previousSibling.appendChild(stateblock.cloneNode(true));
     }
     laststate = state2;
   });
+
+  let footer = header.cloneNode(true)
+  footer.classList.replace("header", "footer");
+  sleepchart.appendChild(footer);
 }
 
 /**
