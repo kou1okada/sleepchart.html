@@ -1,29 +1,30 @@
-.sleepchart .day {
-  border: 1px solid black;
-  padding: 0;
+.sleepchart * {
   margin: 0;
-}
-.sleepchart .day div {
-  display: inline-block;
-}
-  
-.sleepchart .day .label {
   border: 0;
   padding: 0;
-  margin: 0;
-  width: 8em;
-  vertical-align: top;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.sleepchart, .sleepchart .day {
+  border: 1px solid black;
+}
+
+.sleepchart .day {
+  padding: 1px;
+}
+
+.sleepchart .day .label {
+  padding: 0 .5em;
+  width: 6em;
 }
     
-.sleepchart .day .state {
-  border: 0;
-  padding: 0;
-  margin: 0;
+.sleepchart .day div {
+  display: inline-block;
+  height: 1.2em;
   vertical-align: middle;
 }
-.s, .w {
-  height: 1.4em;
-}
+  
 .sleepchart .day .s {
   background: blue;
 }
