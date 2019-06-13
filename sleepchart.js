@@ -1,5 +1,24 @@
+/** 
+ * @file
+ * @brief   sleepchart.js
+ * @details Read lifelog file and rendering sleepchart.
+ * @author  Koichi OKADA
+ * @date    2019
+ * @copyright the MIT license
+ */
+
 const DAY=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
+/**
+ * Rendering sleeplog.
+ * @param {*} sleeplog
+ * 
+ * @details
+ * sleeplog is 2 dimentional array
+ * which stores state as sleeplog[date][time] = state;.
+ * Here the `date` is minuts from the epoch (1970-01-01 UTC)
+ * and the `time` is minuts from 00:00 in a day.
+ */
 function rendering(sleeplog)
 {
   let scale = 1/4;
