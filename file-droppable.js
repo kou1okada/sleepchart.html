@@ -29,14 +29,23 @@ class FileDroppable {
   }
   
   static onDragOver(e) {
-   e.target.classList.add("dragover");
-   e.stopPropagation();
-   e.preventDefault();
-   e.dataTransfer.dropEffect = "copy";
+    if (e.currentTarget.lazyDragLeave) {
+      clearTimeout(e.currentTarget.lazyDragLeave);
+      delete e.currentTarget.lazyDragLeave;
+    }
+    e.currentTarget.classList.add("dragover");
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
   }
 
   static onDragLeave(e) {
-    e.target.classList.remove("dragover");
+    if (!e.currentTarget.lazyDragLeave) {
+      e.currentTarget.lazyDragLeave = setTimeout((currentTarget)=>{
+        currentTarget.classList.remove("dragover");
+        delete currentTarget.lazyDragLeave;
+      }, 0, e.currentTarget);
+    }
     e.stopPropagation();
     e.preventDefault();
   }
@@ -50,7 +59,7 @@ class FileDroppable {
 
   static onChangeFactory(onFiles) {
     return function(e) {
-      return onFiles(e.target.files);
+      return onFiles(e.currentTarget.files);
     };
   }
 
@@ -77,7 +86,7 @@ class FileDroppable {
   
   static onFileReaderLoadOnlyLogging(e, file) {
     console.log(file.name);
-    console.log(e.target.result);
+    console.log(e.currentTarget.result);
   }
 }
 

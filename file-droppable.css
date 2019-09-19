@@ -1,4 +1,5 @@
 label.file_droppable {
+  transition: all 0.5s;
   display: inline-block;
   border: 2px dashed red;
   padding: 2em 2ex;
@@ -7,5 +8,31 @@ label.file_droppable {
   display: none;
 }
 .dragover {
+  transition: all 0.5s;
   background: #FCC;
+}
+
+.wholepage_drop_capture * {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  font-size: 400%;
+}
+.wholepage_drop_capture {
+  transition: all 0.5s;
+  background: #FCC;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+}
+.dragover .wholepage_drop_capture {
+  transition: all 0.5s;
+  pointer-events: auto;
+  opacity: 0.90;
+  z-index: 65535;
 }

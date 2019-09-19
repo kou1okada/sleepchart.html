@@ -162,4 +162,5 @@ function onLoadFile(e, file) {
 window.addEventListener("load", ()=>{
   let e = document.querySelectorAll(".file_droppable");
   [].forEach.call(e, e=>FileDroppable.attach(e, {filereaderload: onLoadFile}));
+  FileDroppable.attach(document.body, {filereaderload: onLoadFile});
 });
