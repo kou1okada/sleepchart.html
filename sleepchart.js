@@ -29,7 +29,7 @@ function rendering(sleeplog)
   let t0 = Date.parse("1970/01/01 00:00:00") / 60000;
   let header;
   {
-    let day =	header = sleepchart.appendChild(document.createElement("div"));
+    let day = sleepchart.appendChild(header = document.createElement("div"));
     let label = day.appendChild(document.createElement("div"));
     let rulerbase = day.appendChild(document.createElement("div"));
     label.appendChild(document.createTextNode("Date"));
