@@ -81,7 +81,7 @@ function rendering(sleeplog)
         let st = document.createElement("div");
         st.classList.add(state2);
         st.style.width = `${(datetime1 - datetime2) * scale}px`;
-        st.title = `${strftime("%H:%M", new Date(datetime2 * 60000))}-${strftime("%H:%M", new Date(datetime1 * 60000))}`;
+        st.title = `${strftime("%H:%M", new Date(datetime2 * 60000))}-${strftime("%H:%M", new Date(datetime1 * 60000))}(${utcstrftime("%H:%M", new Date((datetime1-datetime2) * 60000))})`;
         stateblock.appendChild(st);
       }
     });
