@@ -59,9 +59,10 @@ function rendering(sleeplog)
     let gridbase = stateblock.appendChild(document.createElement("div"));
     label.appendChild(document.createTextNode(strftime("%F", new Date(date * 60000))));
     day.classList.add("day");
-    day.classList.add(DAY[(new Date(date * 60000)).getDay()]);
     label.classList.add("label")
+    label.classList.add(DAY[(new Date(date * 60000)).getDay()]);
     stateblock.classList.add("state")
+    stateblock.classList.add(DAY[(new Date(date * 60000)).getDay()])
     stateblock.style.width = `${1440 * scale}px`;
     gridbase.classList.add("gridbase");
     gridbase.style.width = `${1440 * scale}px`;
