@@ -166,7 +166,12 @@ function parse_and_rendering(text)
   });
   rendering(sleeplog);
   console.log(sleeplog);
+  scroll_to_tail();
   return 0;
+}
+
+function scroll_to_tail() {
+  window.scroll(0, document.documentElement.scrollHeight);
 }
 
 window.addEventListener("load", ()=>{
@@ -178,5 +183,6 @@ window.addEventListener("load", ()=>{
   .then(e=>e.text())
   .then(text=>{
     parse_and_rendering(text);
+    scroll_to_tail();
   });
 });
