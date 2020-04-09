@@ -104,7 +104,16 @@ function rendering(sleeplog)
  */
 function onLoadFile(e, file) {
   //console.log(e.target.result);
-  let lines = e.target.result.split(/\r\n|\n|\r/);
+  parse_and_rendering(e.target.result);
+}
+
+/**
+ * Parse and rendering a livelog with text format.
+ * @param {*} text - A lifelog with text format.
+ */
+function parse_and_rendering(text)
+{
+  let lines = text.split(/\r\n|\n|\r/);
   let yyyymmdd1, yyyymmdd2, hhmm1, hhmm2;
   let date1, date2, time1, time2, datetime1, datetime2;
   let state1, state2;
