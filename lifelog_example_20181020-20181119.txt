@@ -292,7 +292,8 @@
 
 END
 
-somethins memos
+After /^END/ is free area.
+You can write any text here.
 
 20191020
 bra bra bra
